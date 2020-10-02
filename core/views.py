@@ -1,3 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
 
-# Create your views here.
+
+def index(request):
+    return render(request, 'base.html')
+
+
+def donate(request):
+    pass
+
+
+def successPage(request, args):
+    pass
+
+
+def cardDetail(request):
+    pass
