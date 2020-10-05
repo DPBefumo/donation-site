@@ -7,6 +7,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', core_views.index, name='index'),
+    path('donate/', core_views.donate, name='donate'),
+    path('success/<str:args>', core_views.successPage, name='success'),
 ]
 
 if settings.DEBUG:
