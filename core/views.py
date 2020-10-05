@@ -3,7 +3,7 @@ from django.http import JsonResponse
 
 
 def index(request):
-    return render(request, 'base.html')
+    return render(request, 'core/index.html')
 
 
 def donate(request):
