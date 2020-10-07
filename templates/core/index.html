@@ -2,25 +2,40 @@
 
 {% block content %}
 <h2>Main Page</h2>
+    <div class="container1 measure">
+        <form class="pa4 black-80 form" action="{% url 'donate' %}" method="post" id="payment-form">
+            {% csrf_token %}
+            <!-- Option field to offer specified selections and a custom option -->
+            <label class="f6 b db mb2">Donation Amount</label>
+            <select required class="input-reset ba b--black-20 pa2 mb2 db w-100" name="amount" id="amount" placeholder="Choose an Amount" onchange="if(this.options[this.selectedIndex].value=='customAmount'){
+                toggleField(this,this.nextSibling);
+                this.selectedIndex='0';
+            }">
+                <option class="input-reset ba b--black-20 pa2 mb2 db w-100" value='25'>$25</option>
+                <option class="input-reset ba b--black-20 pa2 mb2 db w-100" value='50'>$50</option>
+                <option class="input-reset ba b--black-20 pa2 mb2 db w-100" value='100'>$100</option>
+                <option class="input-reset ba b--black-20 pa2 mb2 db w-100" value='customAmount'>Custom Amount</option>
+            </select><input class="input-reset ba b--black-20 pa2 mb2 db w-100" name="amount" type="number" min="0.00"  max="50000.00" step="0.01" placeholder="Choose an Amount" style="display: none;" disabled="disabled"
+        onblur="if(this.value==''){toggleField(this,this.previousSibling);}"><br>
 
-    <form action="{% url 'donate' %}" method="post" id="payment-form">
-        {% csrf_token %}
-        <input type="text" name="email" placeholder="Email">
-        <input type="text" name="name" placeholder="Name">
-        
-        <div class="form-row">
-            <label for="card-element">
-            Credit or debit card
-            </label>
-            <div id="card-element">
-            <!-- A Stripe Element will be inserted here. -->
+            <!-- Adding in fields to get more information from the users donating -->
+            <label class="f6 b db mb2">Email</label>
+            <input class="input-reset ba b--black-20 pa2 mb2 db w-100" required type="text" name="email">
+            <label class="f6 b db mb2">Name</label>
+            <input class="input-reset ba b--black-20 pa2 mb2 db w-100" required type="text" name="name">
+            
+            <div class="form-row">
+                <label class="f6 b db mb2" for="card-element">Credit/Debit Card</label>
+                <div id="card-element">
+                <!-- A Stripe Element will be inserted here. -->
+                </div>
+
+                <!-- Used to display form errors. -->
+                <div id="card-errors" role="alert"></div>
             </div>
 
-            <!-- Used to display form errors. -->
-            <div id="card-errors" role="alert"></div>
-        </div>
-
-        <button>Submit Payment</button>
-    </form>
+            <button class="f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 mt2 dib black">Submit Payment</button>
+        </form>
+    </div>
 
 {% endblock %}

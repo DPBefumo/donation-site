@@ -1,3 +1,10 @@
+/* -------------- index.html -------------- */
+
+.container1 {
+    background-color: blue;
+}
+
+/* -------------- Stripe Styling -------------- */
 .StripeElement {
     box-sizing: border-box;
     height: 40px;

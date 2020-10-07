@@ -5,7 +5,6 @@ var stripe = Stripe('pk_test_51HYwLhDLxlZyq8nYRdU0YoaVzZ7h5rwmLPKCqJSZHqb0GWtua5
 var elements = stripe.elements();
 
 // Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
 var style = {
 base: {
     color: '#32325d',
@@ -45,11 +44,11 @@ event.preventDefault();
 
 stripe.createToken(card).then(function(result) {
     if (result.error) {
-        // Inform the user if there was an error.
+     // Inform the user if there was an error.
     var errorElement = document.getElementById('card-errors');
     errorElement.textContent = result.error.message;
     } else {
-        // Send the token to your server.
+    // Send the token to your server.
     stripeTokenHandler(result.token);
     }
 });
@@ -57,7 +56,7 @@ stripe.createToken(card).then(function(result) {
 
 // Submit the form with the token ID.
 function stripeTokenHandler(token) {
-    // Insert the token ID into the form so it gets submitted to the server
+// Insert the token ID into the form so it gets submitted to the server
 var form = document.getElementById('payment-form');
 var hiddenInput = document.createElement('input');
 hiddenInput.setAttribute('type', 'hidden');
@@ -65,6 +64,15 @@ hiddenInput.setAttribute('name', 'stripeToken');
 hiddenInput.setAttribute('value', token.id);
 form.appendChild(hiddenInput);
 
-    // Submit the form
+// Submit the form
 form.submit();
+}
+
+// Allow for a user option for donation field.
+function toggleField(hideObj, showObj){
+    hideObj.disabled=true;
+    hideObj.style.display='none';
+    showObj.disabled=false;
+    showObj.style.display='inline';
+    showObj.focus();
 }
